@@ -13,7 +13,7 @@ namespace REST___JavaScript_from_user_stories.Managers
             new Record {Id = nextId++, Title = "Nordstrøm", Artist = "Yeet", Publication = new DateTime(2025, 8, 28), Duration = 3}
         };
 
-         public List<Record> GetAll(string title = null, string sortBy = null)
+         public List<Record> GetAll(string sortBy = null)
         // Optional parameters
         // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments
         {
@@ -21,10 +21,6 @@ namespace REST___JavaScript_from_user_stories.Managers
             // copy constructor
             // Callers should no get a reference to the Data object, but rather get a copy
 
-            if (title != null)
-            {
-                records = records.FindAll(book => book.Title.StartsWith(title));
-            }
             if (sortBy != null)
             {
                 switch (sortBy.ToLower())
@@ -47,7 +43,13 @@ namespace REST___JavaScript_from_user_stories.Managers
                 }
             }
             return records;
-        }
+         }
 
+         public Record Add(Record record)
+         {
+            record.Id = nextId++;
+            recordsList.Add(record);
+            return record;
+         }
     }
 }

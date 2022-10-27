@@ -14,27 +14,27 @@
 <body>
     <div id="app">
 
-        <table class="table table-striped">
+        <table id="table" class="table table-striped">
             <thead>
-                <th><button v-on:click="sortByTitle()">Title</button>
+                <th><button id="title" v-on:click="sortByTitle()">Title</button>
                     <!--button v-on:click="sortBy('title')">Title</button-->
                 </th>
                 <th>
-                    <button v-on:click="sortByArtist()">Artist</button>
+                    <button id="artist" v-on:click="sortByArtist()">Artist</button>
                 </th>
                 <th>
-                    <button v-on:click="sortByDuration()">Duration</button>
+                    <button id="duration" v-on:click="sortByDuration()">Duration</button>
                 </th>
                 <th>
-                    <button v-on:click="sortByPublication()">Publication</button>
+                    <button id="publication" v-on:click="sortByPublication()">Publication</button>
                 </th>
             </thead>
             <tbody>
                 <tr v-for="record in records">
-                    <td>{{record.title}}</td>
-                    <td>{{record.artist }}</td>
-                    <td>{{record.duration }}</td>
-                    <td>{{record.publication }}</td>
+                    <td id="td-title">{{record.title}}</td>
+                    <td id="td-artist">{{record.artist }}</td>
+                    <td id="td-duration">{{record.duration }}</td>
+                    <td id="td-publication">{{record.publication }}</td>
                 </tr>
             </tbody>
         </table>
