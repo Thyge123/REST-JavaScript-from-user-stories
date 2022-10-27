@@ -12,15 +12,15 @@ namespace REST___JavaScript_from_user_stories.Controllers
     public class RecordsController : ControllerBase
     {
 
-        RecordsManager _manager = new RecordsManager();
+        private RecordsManager _manager = new RecordsManager();
 
        
         // GET: api/<RecordsController>
         [HttpGet]
         //[EnableCors("allowAll")]
-        public IEnumerable<Record> Get()
+        public IEnumerable<Record> Get([FromQuery] string ?title, [FromQuery] string ?sort_by)
         {
-            return _manager.GetAll();
+            return _manager.GetAll(title, sort_by);
         }
 
         // GET api/<RecordsController>/5

@@ -1,24 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books, sort in REST</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Posts, Vue3 + REST</title>
 </head>
-<body>
- <div id="app">
-    <div v-if="error" style="color: red">{{error}}</div>
-    <ul>
-        <li v-for="record in records">
-            {{record}}
-        </li>
-    </ul>
- </div>   
 
-<script src="index.js"></script>    
+<body>
+    <div id="app">
+
+        <table class="table table-striped">
+            <thead>
+                <th><button v-on:click="sortByTitle()">Title</button>
+                    <!--button v-on:click="sortBy('title')">Title</button-->
+                </th>
+                <th>
+                    <button v-on:click="sortByArtist()">Artist</button>
+                </th>
+                <th>
+                    <button v-on:click="sortByDuration()">Duration</button>
+                </th>
+                <th>
+                    <button v-on:click="sortByPublication()">Publication</button>
+                </th>
+            </thead>
+            <tbody>
+                <tr v-for="record in records">
+                    <td>{{record.title}}</td>
+                    <td>{{record.artist }}</td>
+                    <td>{{record.duration }}</td>
+                    <td>{{record.publication }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="index.js"></script>
 </body>
+
 </html>
