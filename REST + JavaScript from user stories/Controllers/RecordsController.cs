@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using REST___JavaScript_from_user_stories.DBContext;
 using REST___JavaScript_from_user_stories.Managers;
 using REST___JavaScript_from_user_stories.Models;
 
@@ -11,16 +12,28 @@ namespace REST___JavaScript_from_user_stories.Controllers
     [ApiController]
     public class RecordsController : ControllerBase
     {
+        private IRecordsManager _manager;
 
-        private RecordsManager _manager = new RecordsManager();
-
-       
-        // GET: api/<RecordsController>
-        [HttpGet]
-        //[EnableCors("allowAll")]
-        public IEnumerable<Record> Get([FromQuery] string ?title, [FromQuery] string ?sort_by)
+        public RecordsController(RecordContext context)
         {
-            return _manager.GetAll(title, sort_by);
+            _manager = new DBRecordsManager(context);
+        }
+
+        [EnableCors("AllowAll")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [HttpGet]
+        public ActionResult<IEnumerable<Record>> Get([FromQuery] string? sort_by)
+        {
+            IEnumerable<Record> list = _manager.GetAll(sort_by);
+            if (list == null || list.Count() == 0)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return Ok(list);
+            }
         }
 
         // GET api/<RecordsController>/5

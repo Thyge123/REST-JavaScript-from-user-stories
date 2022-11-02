@@ -13,8 +13,13 @@
 
 <body>
     <div id="app">
-
-        <table class="table table-striped">
+        <input id="titleInput" v-model="addData.title" placeholder="title" type="text" />
+        <input id="artistInput" v-model="addData.artist" placeholder="artist" type="text" />
+        <!-- <input v-model="addData.publication" placeholder="publication" type="text" /> -->
+        <input id="durationInput" v-model="addData.duration" placeholder="duration" type="number"y/>
+        <button id="addRecord" v-on:click="AddRecords()" class="btn btn-success">Add</button>
+        <div>{{addMessage}}</div>
+        <table id="table" class="table table-striped">
             <thead>
                 <th><button v-on:click="sortByTitle()">Title</button>
                     <!--button v-on:click="sortBy('title')">Title</button-->

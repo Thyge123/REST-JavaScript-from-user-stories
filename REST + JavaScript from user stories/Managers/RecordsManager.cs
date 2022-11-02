@@ -3,9 +3,10 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace REST___JavaScript_from_user_stories.Managers
 {
-    public class RecordsManager
+    public class RecordsManager : IRecordsManager
     {
         private static int nextId = 1;
+
 
         private static readonly List<Record> recordsList = new List<Record>
         {
@@ -13,7 +14,9 @@ namespace REST___JavaScript_from_user_stories.Managers
             new Record {Id = nextId++, Title = "Nordstrøm", Artist = "Yeet", Publication = new DateTime(2025, 8, 28), Duration = 3}
         };
 
-         public List<Record> GetAll(string title = null, string sortBy = null)
+
+
+        public IEnumerable<Record> GetAll(string sortBy = null)
         // Optional parameters
         // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments
         {
@@ -35,19 +38,30 @@ namespace REST___JavaScript_from_user_stories.Managers
                     case "title":
                         records = records.OrderBy(record => record.Title).ToList();
                         break;
-                          case "artist":
+                    case "artist":
                         records = records.OrderBy(record => record.Artist).ToList();
                         break;
-                          case "duration":
+                    case "duration":
                         records = records.OrderBy(record => record.Duration).ToList();
                         break;
-                          case "publication":
+                    case "publication":
                         records = records.OrderBy(record => record.Publication.ToString()).ToList();
                         break;
                 }
             }
             return records;
         }
-
+        /// <summary>
+        /// DateTime er midlertidig, da ellers skal den sættes manuelt hver gang
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public Record Add(Record record)
+        {
+            record.Id = nextId++;
+            record.Publication = new DateTime(1999, 1, 1);
+            recordsList.Add(record);
+            return record;
+        }
     }
 }
