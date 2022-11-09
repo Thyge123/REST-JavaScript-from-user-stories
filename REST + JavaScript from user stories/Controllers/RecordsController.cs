@@ -13,10 +13,15 @@ namespace REST___JavaScript_from_user_stories.Controllers
     public class RecordsController : ControllerBase
     {
         private IRecordsManager _manager;
+        //private RecordsManager _manager = new RecordsManager();
 
         public RecordsController(RecordContext context)
         {
-            _manager = new DBRecordsManager(context);
+            //DB
+            // _manager = new DBRecordsManager(context);
+
+            // Non DB
+            _manager = new RecordsManager();
         }
 
         [EnableCors("AllowAll")]
@@ -36,29 +41,83 @@ namespace REST___JavaScript_from_user_stories.Controllers
             }
         }
 
-        // GET api/<RecordsController>/5
+        //GET api/<RecordsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Record> GetById(int id)
         {
-            return "value";
+            Record? foundRecord = _manager.GetById(id);
+            if (foundRecord == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(foundRecord);
+            }
         }
 
-        // POST api/<RecordsController>
+        //// POST api/<RecordsController>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Record> Post([FromBody] Record newRecord)
         {
+            try
+            {
+                Record createdRecord = _manager.Add(newRecord);
+                return Created("/" + createdRecord.Id, createdRecord);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // PUT api/<RecordsController>/5
+        //// PUT api/<RecordsController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Record> Put(int id, [FromBody] Record updates)
         {
+            try
+            {
+                Record updatedRecord = _manager.Update(id, updates);
+                if (updatedRecord == null)
+                {
+                    return NotFound();
+                }
+                return Ok(updatedRecord);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // DELETE api/<RecordsController>/5
+        //// DELETE api/<RecordsController>/5
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Record> Delete(int id)
         {
+           Record record = _manager.Delete(id);
+
+            if (id != record.Id)
+            {
+                return NotFound("No such item, id: " + id);
+            }
+            return Ok(record);
         }
     }
 }

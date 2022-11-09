@@ -1,4 +1,5 @@
 ﻿using REST___JavaScript_from_user_stories.Models;
+using System.Xml.Linq;
 using static System.Reflection.Metadata.BlobBuilder;
 
 namespace REST___JavaScript_from_user_stories.Managers
@@ -24,10 +25,10 @@ namespace REST___JavaScript_from_user_stories.Managers
             // copy constructor
             // Callers should no get a reference to the Data object, but rather get a copy
 
-            if (title != null)
-            {
-                records = records.FindAll(book => book.Title.StartsWith(title));
-            }
+            //if (title != null)
+            //{
+            //    records = records.FindAll(book => book.Title.StartsWith(title));
+            //}
             if (sortBy != null)
             {
                 switch (sortBy.ToLower())
@@ -61,6 +62,30 @@ namespace REST___JavaScript_from_user_stories.Managers
             record.Id = nextId++;
             record.Publication = new DateTime(1999, 1, 1);
             recordsList.Add(record);
+            return record;
+        }
+
+        public Record? GetById(int Id)
+        {
+            return recordsList.Find(record => record.Id == Id);
+        }
+
+        public Record? Update(int Id, Record updates)
+        {
+            Record? oldRecord = GetById(Id);
+            if (oldRecord == null) return null;
+            oldRecord.Title = updates.Title;
+            oldRecord.Artist = updates.Artist;
+            oldRecord.Duration = updates.Duration;
+            oldRecord.Publication = updates.Publication;
+            return oldRecord;
+        }
+
+        public Record? Delete(int Id)
+        {
+            Record record = recordsList.Find(record1 => record1.Id == Id);
+            if (record == null) return null;
+            recordsList.Remove(record);
             return record;
         }
     }

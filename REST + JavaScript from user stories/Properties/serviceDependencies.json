@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "Server=tcp:thygedatabase.database.windows.net,1433;InitialCatalog=ThygeDatabase;PersistSecurityInfo=False;UserID=Thyge;Password={Boohmanden12};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;ConnectionTimeout=30;",
+      "dynamicId": null
+    }
+  }
+}

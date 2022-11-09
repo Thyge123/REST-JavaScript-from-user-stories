@@ -13,39 +13,57 @@
 
 <body>
     <div id="app">
+        <h3>All Records</h3>
+        <table id="table" class="table table-striped">
+            <thead>
+                <th><button id="title" v-on:click="sortByTitle()">Title</button>
+                    <!--button v-on:click="sortBy('title')">Title</button-->
+                </th>
+                <th>
+                    <button id="artist" v-on:click="sortByArtist()">Artist</button>
+                </th>
+                <th>
+                    <button id="duration" v-on:click="sortByDuration()">Duration</button>
+                </th>
+                <th>
+                    <button id="publication" v-on:click="sortByPublication()">Publication</button>
+                </th>
+            </thead>
+            <tbody>
+                <tr v-for="record in records">
+                    <td id="td-title">{{record.title}}</td>
+                    <td id="td-artist">{{record.artist }}</td>
+                    <td id="td-duration">{{record.duration }}</td>
+                    <td id="td-publication">{{record.publication }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+<div>
+    <h3>Add Record</h3>
         <input id="titleInput" v-model="addData.title" placeholder="title" type="text" />
         <input id="artistInput" v-model="addData.artist" placeholder="artist" type="text" />
         <!-- <input v-model="addData.publication" placeholder="publication" type="text" /> -->
         <input id="durationInput" v-model="addData.duration" placeholder="duration" type="number"y/>
         <button id="addRecord" v-on:click="AddRecords()" class="btn btn-success">Add</button>
         <div>{{addMessage}}</div>
-        <table id="table" class="table table-striped">
-            <thead>
-                <th><button v-on:click="sortByTitle()">Title</button>
-                    <!--button v-on:click="sortBy('title')">Title</button-->
-                </th>
-                <th>
-                    <button v-on:click="sortByArtist()">Artist</button>
-                </th>
-                <th>
-                    <button v-on:click="sortByDuration()">Duration</button>
-                </th>
-                <th>
-                    <button v-on:click="sortByPublication()">Publication</button>
-                </th>
-            </thead>
-            <tbody>
-                <tr v-for="record in records">
-                    <td>{{record.title}}</td>
-                    <td>{{record.artist }}</td>
-                    <td>{{record.duration }}</td>
-                    <td>{{record.publication }}</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
-
+        <div>
+            <h3>Delete Record</h3>
+        <input id="deleteInput" v-model.number="deleteRecordId" placeholder="bib" type="number" />
+        <button id="deleteButton" v-on:click="deleteRecord(deleteRecordId)" class="btn btn-warning">Delete</button>
+        <p id="deleteMessage">{{deleteMessage}}</p>
+    </div>
+    <h3>Update Record</h3>
+        <input id="updateId" v-model.number="updateData.id" placeholder="id" type="number" />
+        <input id="updateTitle" v-model="updateData.title" placeholder="title" type="text" />
+        <input id="UpdateArtist" v-model="updateData.artist" placeholder="artist" type="text" />
+        <input id="updateDuration" v-model.number="updateData.duration" placeholder="duration" type="number" />
+        <input id="updatePublication" v-model="updateData.publication" placeholder="publication" type="text" />  
+        <button id="updateButton" v-on:click="updateRecord()" class="btn btn-success">Update</button>
+        <div>{{updateMessage}}</div>
     <script src="index.js"></script>
+</div>
 </body>
 
 </html>

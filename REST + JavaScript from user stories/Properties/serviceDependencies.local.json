@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/thygedatabase/databases/ThygeDatabase",
+      "type": "mssql.azure",
+      "connectionId": "Server=tcp:thygedatabase.database.windows.net,1433;InitialCatalog=ThygeDatabase;PersistSecurityInfo=False;UserID=Thyge;Password={Boohmanden12};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;ConnectionTimeout=30;",
+      "dynamicId": null
+    }
+  }
+}
