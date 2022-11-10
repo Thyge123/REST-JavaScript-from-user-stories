@@ -1,7 +1,6 @@
-const baseUri = "https://rest---javascript-from-user-stories.azurewebsites.net/api/Records"
+const baseUri = "http://localhost:5010/api/Records"
 
-//"http://localhost:5010/api/Records"
-
+"https://rest---javascript-from-user-stories.azurewebsites.net/api/Records"
 
 Vue.createApp({
     data() {
