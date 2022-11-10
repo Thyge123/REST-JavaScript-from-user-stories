@@ -1,6 +1,7 @@
-const baseUri = "http://localhost:5010/api/Records"
+const baseUri = "https://rest---javascript-from-user-stories.azurewebsites.net/api/Records"
 
-// "https://rest---javascript-from-user-stories.azurewebsites.net/api/Records"
+//"http://localhost:5010/api/Records"
+
 
 Vue.createApp({
     data() {
@@ -36,8 +37,6 @@ Vue.createApp({
             try {
                 response = await axios.post(baseUri, this.addData)
                 this.addMessage = "response " + response.status + " " + response.statusText
-                console.log(response.data)
-                console.log(addMessage.response)
                 this.helperGetRecords(baseUri)
             } catch (ex) {
                 alert(ex.message)

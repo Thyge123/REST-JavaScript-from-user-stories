@@ -18,10 +18,10 @@ namespace REST___JavaScript_from_user_stories.Controllers
         public RecordsController(RecordContext context)
         {
             //DB
-            // _manager = new DBRecordsManager(context);
+             _manager = new DBRecordsManager(context);
 
             // Non DB
-            _manager = new RecordsManager();
+            //_manager = new RecordsManager();
         }
 
         [EnableCors("AllowAll")]
