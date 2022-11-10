@@ -30,7 +30,7 @@
                 </th>
             </thead>
             <tbody>
-                <tr v-for="record in records">
+                <tr id="list" v-for="record in records">
                     <td id="td-title">{{record.title}}</td>
                     <td id="td-artist">{{record.artist }}</td>
                     <td id="td-duration">{{record.duration }}</td>
@@ -46,7 +46,7 @@
         <!-- <input v-model="addData.publication" placeholder="publication" type="text" /> -->
         <input id="durationInput" v-model="addData.duration" placeholder="duration" type="number"y/>
         <button id="addRecord" v-on:click="AddRecords()" class="btn btn-success">Add</button>
-        <div>{{addMessage}}</div>
+        <p id="addMessage">{{addMessage}}</p>
     </div>
         <div>
             <h3>Delete Record</h3>
@@ -57,11 +57,11 @@
     <h3>Update Record</h3>
         <input id="updateId" v-model.number="updateData.id" placeholder="id" type="number" />
         <input id="updateTitle" v-model="updateData.title" placeholder="title" type="text" />
-        <input id="UpdateArtist" v-model="updateData.artist" placeholder="artist" type="text" />
+        <input id="updateArtist" v-model="updateData.artist" placeholder="artist" type="text" />
         <input id="updateDuration" v-model.number="updateData.duration" placeholder="duration" type="number" />
         <input id="updatePublication" v-model="updateData.publication" placeholder="publication" type="text" />  
         <button id="updateButton" v-on:click="updateRecord()" class="btn btn-success">Update</button>
-        <div>{{updateMessage}}</div>
+        <p id="updateMessage">{{updateMessage}}<p>
     <script src="index.js"></script>
 </div>
 </body>
